@@ -184,5 +184,13 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="Images\team-steps-3.png" />
+      <BundleResource Include="Images\team-steps-2.png" />
+      <BundleResource Include="Images\team-steps-1.png" />
+      <BundleResource Include="Images\personal-steps-3.png" />
+      <BundleResource Include="Images\personal-steps-2.png" />
+      <BundleResource Include="Images\personal-steps-1.png" />
+    </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
