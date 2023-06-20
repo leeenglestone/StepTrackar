@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.25
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepTrackAR", "StepTrackAR\StepTrackAR.csproj", "{B715B824-E22C-451C-B735-5868B5767287}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B715B824-E22C-451C-B735-5868B5767287}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{B715B824-E22C-451C-B735-5868B5767287}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{B715B824-E22C-451C-B735-5868B5767287}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{B715B824-E22C-451C-B735-5868B5767287}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{B715B824-E22C-451C-B735-5868B5767287}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{B715B824-E22C-451C-B735-5868B5767287}.Debug|iPhone.Build.0 = Debug|iPhone
+		{B715B824-E22C-451C-B735-5868B5767287}.Release|iPhone.ActiveCfg = Release|iPhone
+		{B715B824-E22C-451C-B735-5868B5767287}.Release|iPhone.Build.0 = Release|iPhone
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A4ACF11-35D8-47A1-BBE1-3686D20D74CA}
+	EndGlobalSection
+EndGlobal
