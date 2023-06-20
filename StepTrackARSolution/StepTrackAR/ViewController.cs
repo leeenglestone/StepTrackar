@@ -12,6 +12,7 @@ namespace StepTrackar
 
         TerrainNode terrainNode;
         YearlyChartNode stepHistoryNode;
+        ForestNode forestNode;
 
         public StepTrackarViewController()
         {
@@ -73,25 +74,32 @@ namespace StepTrackar
             var map2Node = new StepTrackarImageNode(2.6, "map-2.png", 0.1f, 0.2f, new SCNVector3(0.18f, 0.1f, z));
 
             // Trees
-            var personalTreesNode = new StepTrackarImageNode(2.8, "personal-trees.png", 0.1f, 0.04f, new SCNVector3(0.30f, 0.27f, z));
+            var personalTreesNode = new StepTrackarImageNode(2.8, "personal-trees.png", 0.1f, 0.04f, new SCNVector3(0.30f, 0.25f, z));
             var treeCount1Node = new StepTrackarImageNode(3, "tree-count-1.png", 0.1f, 0.05f, new SCNVector3(0.3f, 0.2f, z));
 
             var teamTreesNode = new StepTrackarImageNode(3.2, "team-trees.png", 0.1f, 0.04f, new SCNVector3(0.3f, 0.1f, z));
             var treeCount2Node = new StepTrackarImageNode(3.4, "tree-count-2.png", 0.1f, 0.05f, new SCNVector3(0.3f, 0.05f, z));
 
             // Leaderboard
-            var monthlyLeaderboardNode = new StepTrackarImageNode(3.6, "monthly-leaderboard.png", 0.3f, 0.05f, new SCNVector3(0.6f, 0.25f, z));
-            var leaderboardNode = new StepTrackarImageNode(3.8, "leaderboard.png", 0.3f, 0.25f, new SCNVector3(0.6f, 0.1f, z));
+            var monthlyLeaderboardNode = new StepTrackarImageNode(3.6, "monthly-leaderboard.png", 0.3f, 0.05f, new SCNVector3(0.55f, 0.25f, z));
+            var leaderboardNode = new StepTrackarImageNode(3.8, "leaderboard.png", 0.4f, 0.25f, new SCNVector3(0.60f, 0.1f, z));
 
             // Step history
             stepHistoryNode = new YearlyChartNode();
             stepHistoryNode.Opacity = 0.95f;
             stepHistoryNode.Position = new SCNVector3(-0.4f, -0.35f, -0.5f);
 
-            // Terrian
+            // Terrain
             terrainNode = new TerrainNode();
             terrainNode.Opacity = 0;
-            terrainNode.Position = new SCNVector3(-0.2f, -0.1f, -0.4f);
+            terrainNode.Position = new SCNVector3(0.2f, -0.1f, -0.4f);
+
+            forestNode = new ForestNode();
+            forestNode.Opacity = 0;
+            forestNode.Scale = new SCNVector3(0.1f, 0.1f, 0.1f);
+            forestNode.Position = new SCNVector3(-0.6f, -0.1f, -0.5f);
+
+
 
             this.sceneView.Scene.RootNode.AddChildNode(logoNode);
             this.sceneView.Scene.RootNode.AddChildNode(profileNode);
@@ -123,39 +131,12 @@ namespace StepTrackar
 
             this.sceneView.Scene.RootNode.AddChildNode(stepHistoryNode);
             this.sceneView.Scene.RootNode.AddChildNode(terrainNode);
+            this.sceneView.Scene.RootNode.AddChildNode(forestNode);
 
 
 
 
-            /*
-            int row =1;
-            int col=1;
 
-        
-
-            for(int day=1;day<365;day++)
-            { 
-
-
-                {
-                    var tempTreeNode = new TreeNode();
-                    tempTreeNode.Position = new SCNVector3(col*0.6f, -0.05f, row * 0.6f);;
-                    this.sceneView.Scene.RootNode.AddChildNode(tempTreeNode);
-
-                    row++;
-
-                    if(row == 7)
-                    {
-                        col++;
-                        row = 1;
-                    }
-                }
-            }
-            */
-
-            //var treeNode = new TreeNode();
-
-            //this.sceneView.Scene.RootNode.AddChildNode(treeNode);
         }
 
         private void HandleTapGesture(UITapGestureRecognizer sender)
@@ -171,27 +152,11 @@ namespace StepTrackar
 
             var node = hitTest.Node;
 
-            /*
-            if (node is TerrainNode)
-            {
-                // Hide steps
-                stepHistoryNode.Opacity = 0;
-
-                // Show map
-                terrainNode.Show();
-            }
-            else if (node is YearlyChartNode)
-            {
-                // Hide map
-                terrainNode.Opacity = 0;
-
-                // Show steps
-                stepHistoryNode.Show();
-            }
-            */
 
             if (node.Name.Contains("map"))
             {
+                forestNode.Opacity = 0;
+
                 // Hide steps
                 stepHistoryNode.Opacity = 0;
 
@@ -200,22 +165,60 @@ namespace StepTrackar
             }
             else if (node.Name.Contains("steps"))
             {
+                forestNode.Opacity = 0;
+
                 // Hide map
                 terrainNode.Opacity = 0;
 
                 // Show steps
                 stepHistoryNode.Show();
             }
+            else if (node.Name.Contains("tree"))
+            {
+                // Hide map
+                terrainNode.Opacity = 0;
 
+                // Show steps
+                stepHistoryNode.Opacity = 0;
 
-            // If map touch
-            // Show map node (animations and all)
+                forestNode.Show();
+            }
 
-            // If is tree touch
+        }
 
-            //var material = new SCNMaterial();
-            //material.Diffuse.Contents = UIColor.Black;
-            //node.Geometry.FirstMaterial = material;
+        public class ForestNode : SCNNode
+        {
+            SCNAction fadeInAction;
+
+            public ForestNode()
+            {
+                fadeInAction = SCNAction.FadeOpacityTo(0.99f, 2);
+
+                int row = 1;
+                int col = 1;
+
+                for (int day = 1; day < 100; day++)
+                {
+                    {
+                        var tempTreeNode = new TreeNode();
+                        tempTreeNode.Position = new SCNVector3(col * 0.6f, -0.05f, row * 0.6f); ;
+                        this.AddChildNode(tempTreeNode);
+
+                        row++;
+
+                        if (row == 5)
+                        {
+                            col++;
+                            row = 1;
+                        }
+                    }
+                }
+            }
+
+            public void Show()
+            {
+                RunAction(fadeInAction);
+            }
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -336,7 +339,7 @@ namespace StepTrackar
 
             public TerrainNode()
             {
-                fadeInAction = SCNAction.FadeOpacityTo(0.9f, 3);
+                fadeInAction = SCNAction.FadeOpacityTo(1f, 2);
 
                 this.AddChildNode(CreateModelNodeFromFile("art.scnassets/mam-tor-1-2.dae"));
             }
